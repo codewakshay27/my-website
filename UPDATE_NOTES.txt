@@ -1,0 +1,7 @@
+Updates made:
+- Rebuilt index.html with mobile-friendly layout
+- Category bubble row (top, horizontally scrollable)
+- Product cards show placeholder SVG images generated from product names
+- Brand shown under product name; price displayed (10% discount applied)
+- Improved checkout form (professional, removed agree checkbox) and live order summary shown under form while filling
+- Responsive CSS and improved buttons

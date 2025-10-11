@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <title>Sai Ashray Crackers 🎆</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="top-banner">
+      <h1 class="brand-title">🪔 Sai Ashray FireCrackers 🪔</h1>
+      <div class="discount-badge">✨ <span>Flat 10% OFF</span> ✨</div>
+    </div>
+  </header>
+
+  <section class="controls">
+    <input id="searchInput" type="search" placeholder="Search crackers..." />
+    <div id="categoryScroll" class="category-scroll"></div>
+  </section>
+
+  <main>
+    <section class="products" id="productsGrid"></section>
+  </main>
+
+  <footer class="cart-footer">
+    <div id="cartSummary">🛒 Items: 0 | Total: ₹0</div>
+    <button id="openCart" class="checkout-btn">Checkout</button>
+  </footer>
+
+  <!-- Checkout Modal -->
+  <div id="checkoutModal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Checkout</h2>
+      <form id="checkoutForm">
+        <label>Full Name <input id="custName" required /></label>
+        <label>Mobile Number <input id="custPhone" type="tel" required /></label>
+        <label>Address <textarea id="custAddress" required></textarea></label>
+        <div class="order-summary" id="orderSummary"></div>
+        <div class="total-row">Subtotal: ₹<span id="subtotalAmount">0</span><br>
+          Discount (10%): ₹<span id="discountAmount">0</span><br>
+          <strong>Final Total: ₹<span id="finalTotal">0</span></strong></div>
+        <div class="modal-actions">
+          <button type="button" id="cancelCheckout">Cancel</button>
+          <button type="submit" id="confirmOrder">Confirm & WhatsApp</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">🎇 Wishing you a Safe & Happy Diwali 🎇</footer>
+
+  <script src="products.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
