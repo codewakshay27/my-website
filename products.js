@@ -8,7 +8,7 @@ const PRODUCTS = [
     brand: "Shivjothi",
     price: 179,
     quantity: "1 Box",
-    image: "/firecracker.webp",
+    image: "image/2 Sound Rocket.jpg",
     description: "High-flying colorful rocket bursting Two times with loud Sound",
     category: "Rockets",
   },
