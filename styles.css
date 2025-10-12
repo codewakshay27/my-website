@@ -155,69 +155,127 @@ body {
 }
 
 /* Modal */
+/* Modal (light, clean quotation design) */
 .modal {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.4);
-  display: flex; justify-content: center; align-items: center;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 .modal.hidden { display: none; }
+
 .modal-content {
-  background: #fff;
-  border-radius: 10px;
-  padding: 16px;
-  width: 90%;
-  max-width: 400px;
+  width: 94%;
+  max-width: 720px;
+  background: #ffffff;
+  color: #222;
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: 0 20px 50px rgba(10,10,10,0.2);
+  border: 1px solid #f1e6d6;
+  font-family: 'Poppins', sans-serif;
 }
-.modal-content h2 {
+
+/* Close button & title */
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  float: right;
+  cursor: pointer;
+  color: #888;
+}
+.modal-title {
   color: #d35400;
-  text-align: center;
+  text-align: left;
+  margin: 0 0 6px 0;
+  font-size: 1.4rem;
+  font-weight: 700;
 }
-.modal-content label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 0.9rem;
-}
-.modal-content input, .modal-content textarea {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  margin-top: 4px;
-}
-.order-summary {
-  max-height: 150px;
-  overflow-y: auto;
-  border: 1px solid #eee;
-  border-radius: 6px;
-  padding: 6px;
-  margin-top: 8px;
-}
-.order-item { font-size: 0.85rem; margin-bottom: 4px; }
-.total-row {
-  margin-top: 8px;
-  font-size: 0.9rem;
+
+.quote-date {
   text-align: right;
+  color: #666;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+/* Customer grid */
+.customer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.customer-grid label { font-weight:600; color:#444; font-size:0.95rem; }
+.customer-grid input, .customer-grid textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #e9dfcf;
+  background: #fff;
+  margin-top: 6px;
+  font-size: 0.95rem;
+}
+.customer-grid textarea { min-height:64px; resize:vertical; grid-column: 1 / -1; }
+
+/* Order table */
+.order-summary { margin-top: 12px; overflow-x: auto; }
+.quote-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 0.95rem;
+}
+.quote-table thead th {
+  text-align: left;
+  padding: 10px 8px;
+  background: #faf3eb;
+  border-bottom: 1px solid #f1e6d6;
+  color: #444;
+  font-weight:700;
+}
+.quote-table tbody td {
+  padding: 10px 8px;
+  border-bottom: 1px dashed #f3e9dc;
   color: #333;
 }
+.quote-table tbody tr:last-child td { border-bottom: none; }
+
+/* Totals */
+.totals-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 12px;
+  align-items: center;
+}
+.totals-grid .grand { grid-column: 1 / -1; text-align: right; font-size:1.1rem; color:#d32f2f; font-weight:800; }
+
+/* Actions */
 .modal-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
-  margin-top: 10px;
+  gap: 10px;
+  margin-top: 14px;
 }
 .modal-actions button {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 6px;
+  padding: 9px 14px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight:700;
+  border: none;
 }
-.modal-actions button[type="button"] {
-  background: #eee;
-}
-.modal-actions button[type="submit"] {
-  background: linear-gradient(90deg,#ff9900,#ff6600);
-  color: #fff;
-  font-weight: 700;
+.modal-actions #cancelCheckout { background:#f3f3f3; color:#444; }
+.modal-actions #confirmOrder { background: linear-gradient(90deg,#ff8a00,#ff4b2b); color:#fff; }
+
+/* Responsive */
+@media (max-width:720px) {
+  .customer-grid { grid-template-columns: 1fr; }
+  .totals-grid { grid-template-columns: 1fr; text-align:right; }
 }
 
 /* Footer */
@@ -261,6 +319,7 @@ body {
 /* ---------- 3D Black Product Cards (Improved Version) ---------- */
 /* ---------- Premium Metallic Product Card Theme ---------- */
 /* ---------- Premium Gold 3D Product Card Theme ---------- */
+/* ---------- Updated Premium Gold Product Card (No Reflection) ---------- */
 .card {
   background: radial-gradient(circle at top left, #fffbe8 0%, #f8e49a 40%, #d4af37 100%);
   border-radius: 14px;
@@ -276,37 +335,15 @@ body {
   overflow: hidden;
 }
 
-/* shine reflection animation */
-.card::before {
-  content: "";
-  position: absolute;
-  top: -60%;
-  left: -80%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    120deg,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0.6),
-    rgba(255, 255, 255, 0.1)
-  );
-  transform: rotate(25deg);
-  transition: all 0.8s ease;
-  opacity: 0;
-}
-.card:hover::before {
-  left: 120%;
-  opacity: 1;
-}
-
 .card:hover {
-  transform: translateY(-6px) scale(1.02);
+  transform: translateY(-6px) scale(1.03);
   box-shadow:
     0 10px 25px rgba(255, 215, 0, 0.5),
     inset 0 0 18px rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 200, 120, 0.5);
 }
 
-/* Product image */
+/* Product image smooth zoom */
 .card img {
   width: 100%;
   border-radius: 10px;
@@ -315,8 +352,9 @@ body {
   transition: transform 0.4s ease;
 }
 .card:hover img {
-  transform: scale(1.04);
+  transform: scale(1.05);
 }
+
 
 /* Product name */
 .card h3 {

@@ -31,25 +31,52 @@
     <button id="openCart" class="checkout-btn">Checkout</button>
   </footer>
 
-  <!-- Checkout Modal -->
+    <!-- Checkout Modal -->
   <div id="checkoutModal" class="modal hidden">
     <div class="modal-content">
-      <h2>Checkout</h2>
+      <button id="closeModal" class="modal-close" aria-label="Close">✕</button>
+      <h2 class="modal-title">Quotation Summary</h2>
+
+      <p id="orderDate" class="quote-date"></p>
+
       <form id="checkoutForm">
-        <label>Full Name <input id="custName" required /></label>
-        <label>Mobile Number <input id="custPhone" type="tel" required /></label>
-        <label>Address <textarea id="custAddress" required></textarea></label>
-        <div class="order-summary" id="orderSummary"></div>
-        <div class="total-row">Subtotal: ₹<span id="subtotalAmount">0</span><br>
-          Discount (10%): ₹<span id="discountAmount">0</span><br>
-          <strong>Final Total: ₹<span id="finalTotal">0</span></strong></div>
+        <div class="customer-grid">
+          <label>Full Name* <input id="custName" required /></label>
+          <label>Mobile Number* <input id="custPhone" type="tel" required /></label>
+          <label>WhatsApp Number* <input id="custWhats" type="tel" required /></label>
+          <label>Address* <textarea id="custAddress" required></textarea></label>
+        </div>
+
+        <div class="order-summary">
+          <table class="quote-table" aria-label="Order summary">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Price (₹)</th>
+                <th>Total (₹)</th>
+              </tr>
+            </thead>
+            <tbody id="orderBody">
+              <!-- JS will inject rows here -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="totals-grid">
+          <div>Subtotal: <strong>₹<span id="subtotalAmount">0</span></strong></div>
+          <div>Discount (10%): <strong>₹<span id="discountAmount">0</span></strong></div>
+          <div class="grand">Grand Total: <strong>₹<span id="finalTotal">0</span></strong></div>
+        </div>
+
         <div class="modal-actions">
-          <button type="button" id="cancelCheckout">Cancel</button>
+          <button type="button" id="cancelCheckout">← Back</button>
           <button type="submit" id="confirmOrder">Confirm & WhatsApp</button>
         </div>
       </form>
     </div>
   </div>
+
 
   <footer class="site-footer">🎇 Wishing you a Safe & Happy Diwali 🎇</footer>
 

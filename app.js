@@ -151,24 +151,34 @@ function closeCheckout() {
 }
 
 function renderOrderSummary() {
-  const container = document.getElementById("orderSummary");
-  container.innerHTML = "";
+  const tbody = document.getElementById("orderBody");
+  tbody.innerHTML = "";
   let subtotal = 0;
+
   Object.entries(cart).forEach(([id, qty]) => {
     const p = PRODUCTS_MAP[id];
-    const row = document.createElement("div");
+    if (!p) return;
     const itemTotal = p.price * qty;
     subtotal += itemTotal;
-    row.className = "order-item";
-    row.textContent = `${qty} × ${p.name} — ₹${itemTotal}`;
-    container.appendChild(row);
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${p.name}</td>
+      <td style="text-align:center">${qty}</td>
+      <td style="text-align:right">₹${p.price}</td>
+      <td style="text-align:right">₹${itemTotal}</td>
+    `;
+    tbody.appendChild(tr);
   });
+
   const discount = Math.round(subtotal * 0.1);
   const finalTotal = subtotal - discount;
+
   document.getElementById("subtotalAmount").textContent = subtotal;
   document.getElementById("discountAmount").textContent = discount;
   document.getElementById("finalTotal").textContent = finalTotal;
 }
+
 
 function init() {
   renderCategories();
