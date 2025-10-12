@@ -37,6 +37,11 @@ function renderProducts() {
     if (q && !p.name.toLowerCase().includes(q)) return false;
     return true;
   });
+  // ✅ Sort products by price ascending if "All" category is selected
+  if (!sel) {
+    filtered.sort((a, b) => a.price - b.price);
+  }
+
 
   if (filtered.length === 0) {
     grid.innerHTML = `<p style="text-align:center;color:#777;">No products found.</p>`;
