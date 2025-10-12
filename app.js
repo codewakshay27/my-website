@@ -1,5 +1,5 @@
 // ---------- app.js ----------
-const SELLER_WHATSAPP = "8262871647"; 
+const SELLER_WHATSAPP = "7020810879"; 
 
 let cart = {};
 const PRODUCTS_MAP = {};
@@ -202,7 +202,7 @@ function init() {
     const discount = Number(document.getElementById("discountAmount").textContent);
     const total = Number(document.getElementById("finalTotal").textContent);
 
-const msg = `✨🪔 *🎉 New Diwali Order Alert 🎉* 🪔✨
+const msg = `✨🪔 * New Diwali Order Alert * 🪔✨
 
 👤 *Customer:* ${name}
 📞 *Mobile:* ${phone}
@@ -222,7 +222,7 @@ ${Object.entries(cart).map(([id, qty], index) => {
 ✅ *Final Payable Amount:* ₹${total}
 
 💥 *Wishing you and your family a Very Happy & Safe Diwali!* 💥`;
-
+  
 
 const link = `https://wa.me/${SELLER_WHATSAPP}?text=${encodeURIComponent(msg)}`;
 window.open(link, "_blank");
