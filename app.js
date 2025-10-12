@@ -202,35 +202,35 @@ function init() {
     const discount = Number(document.getElementById("discountAmount").textContent);
     const total = Number(document.getElementById("finalTotal").textContent);
 
-    const msg = `✨🪔 *New Diwali Order Alert...!* 🪔✨  
+const msg = `✨🪔 *🎉 New Diwali Order Alert 🎉* 🪔✨
 
 👤 *Customer:* ${name}
 📞 *Mobile:* ${phone}
-📱 *WhatsApp:* ${phone}
 🏠 *Address:* ${addr}
 
 🎆 *Ordered Items:* 
-
-${Object.entries(cart).map(([id, qty]) => {
+${Object.entries(cart).map(([id, qty], index) => {
   const p = PRODUCTS_MAP[id];
   const lineTotal = p.price * qty;
-  return `${qty} × ${p.name} @ ₹${p.price} = ₹${lineTotal}`;
+  return `${index + 1}. ${p.name} | ${qty} pcs × ₹${p.price} = ₹${lineTotal}`;
 }).join("\n")}
+
 ------------------------------------
+🧮 *Total Items:* ${Object.values(cart).reduce((a, b) => a + b, 0)} pcs
 💰 *Subtotal:* ₹${subtotal}
 🎁 *Festival Discount (10%):* ₹${discount}
-
 ✅ *Final Payable Amount:* ₹${total}
 
- 
-💥 *Wish you and your family a Very Happy & Safe Diwali!* 💥`;
+💥 *Wishing you and your family a Very Happy & Safe Diwali!* 💥`;
 
-    const link = `https://wa.me/${SELLER_WHATSAPP}?text=${encodeURIComponent(msg)}`;
-    window.open(link, "_blank");
 
-    cart = {};
-    updateCart();
-    closeCheckout();
+const link = `https://wa.me/${SELLER_WHATSAPP}?text=${encodeURIComponent(msg)}`;
+window.open(link, "_blank");
+
+cart = {};
+updateCart();
+closeCheckout();
+
   };
 }
 
