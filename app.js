@@ -1,5 +1,4 @@
 // ---------- app.js ----------
-// 🪔 Sai Ashray Fire Crackers Store Logic
 const SELLER_WHATSAPP = "8262871647"; 
 
 let cart = {};
@@ -61,7 +60,11 @@ function renderProducts() {
 
     const meta = document.createElement("div");
     meta.className = "meta";
-    meta.innerHTML = `<span>${p.brand}</span><span>₹${p.price}</span>`;
+    meta.innerHTML = `
+      <span>Brand: ${p.brand}</span>
+      <span>₹${p.price}</span>
+      <span>${p.quantity ? p.quantity : ""}</span>
+    `;
 
     const qtyRow = document.createElement("div");
     qtyRow.className = "qty-row";
@@ -100,14 +103,45 @@ function updateCart() {
     (t, [id, q]) => t + PRODUCTS_MAP[id].price * q,
     0
   );
-  document.getElementById("cartSummary").textContent = `🛒 Items: ${items} | Total: ₹${subtotal}`;
+
+  let summary = document.getElementById("cartSummary");
+  summary.textContent = `🛒 Items: ${items} | Total: ₹${subtotal}`;
+
+  // warning message element check/create
+  let warning = document.getElementById("checkoutWarning");
+  if (!warning) {
+    warning = document.createElement("div");
+    warning.id = "checkoutWarning";
+    warning.className = "checkout-warning";
+    summary.parentElement.appendChild(warning);
+  }
+  warning.style.display = "none";
 }
 
 function openCheckout() {
+  const subtotal = Object.entries(cart).reduce(
+    (t, [id, q]) => t + PRODUCTS_MAP[id].price * q,
+    0
+  );
+
   if (Object.keys(cart).length === 0) {
     alert("Your cart is empty!");
     return;
   }
+
+  if (subtotal < 500) {
+    const warning = document.getElementById("checkoutWarning");
+    if (warning) {
+      warning.textContent = "⚠️ Minimum order value is ₹500 for delivery.";
+      warning.style.display = "block";
+    }
+    return;
+  }
+
+  // hide warning if valid
+  const warning = document.getElementById("checkoutWarning");
+  if (warning) warning.style.display = "none";
+
   document.getElementById("checkoutModal").classList.remove("hidden");
   renderOrderSummary();
 }
@@ -136,43 +170,6 @@ function renderOrderSummary() {
   document.getElementById("finalTotal").textContent = finalTotal;
 }
 
-// ---------------- WhatsApp Message ----------------
-function sendWhatsAppMessage(name, phone, addr, subtotal, discount, total) {
-  if (!name || !phone || !addr) {
-    alert("Please fill all details!");
-    return;
-  }
-
-  const msg = `✨🪔 *New Diwali Order Alert...!* 🪔✨
-
-*Customer:* ${name}
-*Mobile:* ${phone}
-*WhatsApp:* ${phone}
-*Address:* ${addr}
-
-🎆 *Ordered Items:* 
-${Object.entries(cart).map(([id, qty]) => {
-    const p = PRODUCTS_MAP[id];
-    const lineTotal = p.price * qty;
-    return `${qty} × ${p.name} @ ₹${p.price} = ₹${lineTotal}`;
-  }).join("\n")}
-------------------------------------
-*Subtotal:* ₹${subtotal}
-*Festival Discount (10%):* ₹${discount}
-*Final Payable Amount:* ₹${total}
-
-*Thank you for choosing Sai Ashray Fire Crackers!* 
-*Wish you and your family a Very Happy & Safe Diwali!* 💥`;
-
-  const encodedMsg = encodeURIComponent(msg);
-  const link = `https://wa.me/${SELLER_WHATSAPP}?text=${encodedMsg}`;
-  window.open(link, "_blank");
-
-  cart = {};
-  updateCart();
-  closeCheckout();
-}
-
 function init() {
   renderCategories();
   renderProducts();
@@ -190,7 +187,35 @@ function init() {
     const discount = Number(document.getElementById("discountAmount").textContent);
     const total = Number(document.getElementById("finalTotal").textContent);
 
-    sendWhatsAppMessage(name, phone, addr, subtotal, discount, total);
+    const msg = `✨🪔 *New Diwali Order Alert...!* 🪔✨  
+
+👤 *Customer:* ${name}
+📞 *Mobile:* ${phone}
+📱 *WhatsApp:* ${phone}
+🏠 *Address:* ${addr}
+
+🎆 *Ordered Items:* 
+
+${Object.entries(cart).map(([id, qty]) => {
+  const p = PRODUCTS_MAP[id];
+  const lineTotal = p.price * qty;
+  return `${qty} × ${p.name} @ ₹${p.price} = ₹${lineTotal}`;
+}).join("\n")}
+------------------------------------
+💰 *Subtotal:* ₹${subtotal}
+🎁 *Festival Discount (10%):* ₹${discount}
+
+✅ *Final Payable Amount:* ₹${total}
+
+ 
+💥 *Wish you and your family a Very Happy & Safe Diwali!* 💥`;
+
+    const link = `https://wa.me/${SELLER_WHATSAPP}?text=${encodeURIComponent(msg)}`;
+    window.open(link, "_blank");
+
+    cart = {};
+    updateCart();
+    closeCheckout();
   };
 }
 
