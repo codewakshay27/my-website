@@ -441,3 +441,17 @@ body {
   color: #111;
   font-weight: 600;
 }
+.footer-credit {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #555;
+  background: #fff8f0;
+  border-top: 1px solid #e0d6b5;
+  padding: 12px 0;
+  margin-top: 30px;
+  font-family: "Poppins", sans-serif;
+}
+
+.footer-credit strong {
+  color: #d4af37; /* elegant golden tone */
+}
