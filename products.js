@@ -1113,7 +1113,7 @@ const PRODUCTS = [
     price: 10,
     quantity: "1 Pack",
     image: "image/2111.jpg",
-    description: "A pack of **small, quick-fire 'Red Bijali' (Electric) crackers**. **50 pieces per pack**.",
+    description: "burns slowly to produce a long, coiling pillar of black, snake-like ash with no sparks.",
     category: "Child Items",
   },
 
