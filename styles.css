@@ -455,3 +455,26 @@ body {
 .footer-credit strong {
   color: #d4af37; /* elegant golden tone */
 }
+/* 🔧 Fix: Footer visibility on mobile when modal is open */
+.footer-credit {
+  position: relative;
+  z-index: 5; /* ensures footer stays above normal content */
+}
+
+/* Make sure modal stays above footer only when open */
+.modal {
+  z-index: 1000; /* modal always top layer */
+}
+
+/* Prevent footer from being covered by checkout modal background */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Mobile-specific tweak */
+@media (max-width: 600px) {
+  .footer-credit {
+    font-size: 0.8rem;
+    padding: 15px 0;
+  }
+}
