@@ -65,11 +65,18 @@ function renderProducts() {
 
     const meta = document.createElement("div");
     meta.className = "meta";
-    meta.innerHTML = `
-      <span>Brand: ${p.brand}</span>
-      <span>₹${p.price}</span>
-      <span>${p.quantity ? p.quantity : ""}</span>
-    `;
+    // 10% badhi hui (cut) price dikhane ke liye
+const increasedPrice = Math.round(p.price * 1.10);
+
+meta.innerHTML = `
+  <span>Brand: ${p.brand}</span>
+  <span>
+    ₹${p.price}
+    <s style="color:#888; font-size:0.9rem; margin-left:6px;">₹${increasedPrice}</s>
+  </span>
+  <span>${p.quantity ? p.quantity : ""}</span>
+`;
+
 
     const qtyRow = document.createElement("div");
     qtyRow.className = "qty-row";
