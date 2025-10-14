@@ -2,6 +2,7 @@
 // ✅ No "export", only plain JS variable (works in normal HTML setup)
 
 const PRODUCTS = [
+    
   {
     id: 1,
     name: "Rocket Lunic 2 Sound",
@@ -1109,3 +1110,5 @@ id: 60,
   },
 
 ];
+// Automatically reduce all prices by 10%
+PRODUCTS.forEach(p => p.price = Math.round(p.price * 0.9));

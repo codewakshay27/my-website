@@ -82,47 +82,13 @@
   </footer>
 
   <!-- Visitor Counter (styled same as footer) -->
-<div id="visitorCounter" 
-     style="text-align:center;
-            font-size:0.85rem;
-            color:#555;
-            background:#fff8f0;
-            border-top:1px solid #e0d6b5;
-            padding:8px 0;
-            font-family:'Poppins', sans-serif;">
-  👁️‍🗨️ Loading visitor count...
-</div>
 
 
   <script src="products.js"></script>
   <script src="app.js"></script>
 
   <!-- Visitor Counter Script -->
-  <script>
-    (function() {
-      const apiUrl = "https://api.countapi.xyz";
-      const namespace = "saiashrayfirecrackers.vercel";
-      const key = "visitor_count";
-      const storageKey = "visited_once";
-      const el = document.getElementById("visitorCounter");
+  <!-- Visitor Counter Script (Stable Version) -->
 
-      async function updateCount() {
-        try {
-          if (!localStorage.getItem(storageKey)) {
-            await fetch(`${apiUrl}/hit/${namespace}/${key}`);
-            localStorage.setItem(storageKey, "true");
-          }
-          const res = await fetch(`${apiUrl}/get/${namespace}/${key}`);
-          const data = await res.json();
-          const count = data.value || 1;
-          el.textContent = `👁️‍🗨️ ${count.toLocaleString()} people have visited this site.`;
-        } catch (err) {
-          el.textContent = "👁️‍🗨️ Visitors data unavailable.";
-          console.error(err);
-        }
-      }
-      updateCount();
-    })();
-  </script>
 </body>
 </html>
