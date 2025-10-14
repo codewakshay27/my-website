@@ -1,5 +1,5 @@
 // ---------- app.js ----------
-const SELLER_WHATSAPP = "+917020810879"; 
+const SELLER_WHATSAPP = "+917020810879000"; 
 
 let cart = {};
 const PRODUCTS_MAP = {};
