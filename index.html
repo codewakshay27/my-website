@@ -13,9 +13,10 @@
       <div class="discount-badge">✨ <span>Flat 10% OFF</span> ✨</div>
     </div>
   </header>
+
   <div class="delivery-banner">
-  🚚 <strong>Free Delivery</strong> on Orders Above ₹500
-</div>
+    🚚 <strong>Free Delivery</strong> on Orders Above ₹500
+  </div>
 
   <section class="controls">
     <input id="searchInput" type="search" placeholder="Search crackers..." />
@@ -31,7 +32,7 @@
     <button id="openCart" class="checkout-btn">Checkout</button>
   </footer>
 
-    <!-- Checkout Modal -->
+  <!-- Checkout Modal -->
   <div id="checkoutModal" class="modal hidden">
     <div class="modal-content">
       <button id="closeModal" class="modal-close" aria-label="Close">✕</button>
@@ -57,9 +58,7 @@
                 <th>Total (₹)</th>
               </tr>
             </thead>
-            <tbody id="orderBody">
-              <!-- JS will inject rows here -->
-            </tbody>
+            <tbody id="orderBody"></tbody>
           </table>
         </div>
 
@@ -77,13 +76,53 @@
     </div>
   </div>
 
-
   <!-- Footer Credit -->
-<footer class="footer-credit">
-  <p>© 2025 Designed & Maintained by <strong>ASRC</strong></p>
-</footer>
+  <footer class="footer-credit">
+    <p>© 2025 Designed & Maintained by <strong>Team ASRC</strong></p>
+  </footer>
+
+  <!-- Visitor Counter (styled same as footer) -->
+<div id="visitorCounter" 
+     style="text-align:center;
+            font-size:0.85rem;
+            color:#555;
+            background:#fff8f0;
+            border-top:1px solid #e0d6b5;
+            padding:8px 0;
+            font-family:'Poppins', sans-serif;">
+  👁️‍🗨️ Loading visitor count...
+</div>
+
 
   <script src="products.js"></script>
   <script src="app.js"></script>
+
+  <!-- Visitor Counter Script -->
+  <script>
+    (function() {
+      const apiUrl = "https://api.countapi.xyz";
+      const namespace = "saiashrayfirecrackers.vercel";
+      const key = "visitor_count";
+      const storageKey = "visited_once";
+      const el = document.getElementById("visitorCounter");
+
+      async function updateCount() {
+        try {
+          if (!localStorage.getItem(storageKey)) {
+            await fetch(`${apiUrl}/hit/${namespace}/${key}`);
+            localStorage.setItem(storageKey, "true");
+          }
+          const res = await fetch(`${apiUrl}/get/${namespace}/${key}`);
+          const data = await res.json();
+          const count = data.value || 1;
+          el.textContent = `👁️‍🗨️ ${count.toLocaleString()} people have visited this site.`;
+        } catch (err) {
+          el.textContent = "👁️‍🗨️ Visitors data unavailable.";
+          console.error(err);
+        }
+      }
+      updateCount();
+    })();
+  </script>
 </body>
 </html>
